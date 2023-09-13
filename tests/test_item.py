@@ -9,3 +9,7 @@ if __name__ == '__main__':
     # testing apply_discount
     item1.apply_discount()
     assert item1.price == 20000 * item1.pay_rate
+    # testing string_to_number
+    assert item1.string_to_number('6.2') == 6
+    assert item1.string_to_number('22.3') == 22
+    assert item1.string_to_number('6.2') == 6
