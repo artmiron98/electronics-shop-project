@@ -13,3 +13,8 @@ if __name__ == '__main__':
     assert item1.string_to_number('6.2') == 6
     assert item1.string_to_number('22.3') == 22
     assert item1.string_to_number('6.2') == 6
+    #testing repr
+    item2 = item.Item("Планшет", 40000, 10)
+    assert repr(item2) == "Item('Планшет', 40000, 10)"
+    # testing str
+    assert str(item2) == 'Планшет'

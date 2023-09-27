@@ -32,6 +32,11 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
 
 
     def calculate_total_price(self) -> float:
@@ -51,6 +56,7 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, file):
         """Создание объектов из данных файла"""
+        Item.all.clear()
         with open(file, 'r') as f:
             reader = csv.DictReader(f)
             for row in reader:
