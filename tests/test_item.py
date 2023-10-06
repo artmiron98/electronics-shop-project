@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import src.item as item
+from src.phone import Phone
 
 if __name__ == '__main__':
     item.Item.pay_rate = 0,5
@@ -18,3 +19,7 @@ if __name__ == '__main__':
     assert repr(item2) == "Item('Планшет', 40000, 10)"
     # testing str
     assert str(item2) == 'Планшет'
+    # testing __add__
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    assert phone1 + item2 == 15
+    assert phone1 + item1 == 35
