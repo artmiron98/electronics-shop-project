@@ -13,9 +13,9 @@ class Item:
     @get_name.setter
     def set_name(self, name):
         if len(name) >= 10:
-            self.__name = name[:10]
+            self.name = name[:10]
         else:
-            self.__name = name
+            self.name = name
 
 
 
@@ -52,6 +52,12 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * Item.pay_rate
+
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        raise TypeError("Складывать можно только объекты классов с родительским классом Item")
 
     @classmethod
     def instantiate_from_csv(cls, file):
