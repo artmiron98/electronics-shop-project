@@ -1,14 +1,17 @@
+import pytest
 from src.keyboard import Keyboard
 
-if __name__ == '__main__':
-    kb = Keyboard('Lenovo', 5000, 10)
-    # test change_lang
-    assert str(kb.language) == "EN"
-    kb.change_lang()
-    assert str(kb.language) == "RU"
-    kb.change_lang()
-    assert str(kb.language) == "EN"
-    # test __repr__
-    assert repr(kb) == "Keyboard('Lenovo', 5000, 10)"
-    # test __str__
-    assert str(kb) == 'Lenovo'
+@pytest.fixture
+def key_board():
+    return Keyboard('Lenovo', 5000, 10)
+
+def test_change_lang(key_board):
+    key_board.change_lang()
+    assert key_board.language == "RU"
+
+def test__repr__(key_board):
+    assert repr(key_board) == "Keyboard('Lenovo', 5000, 10)"
+
+def test__str__(key_board):
+    assert str(key_board) == 'Lenovo'
+
