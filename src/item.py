@@ -1,4 +1,13 @@
 import csv
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, *args, **kwargs):
+        self.massage = args[0] if args else 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.massage
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -62,11 +71,18 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, file):
         """Создание объектов из данных файла"""
-        Item.all.clear()
-        with open(file, 'r') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                cls(row['name'], row['price'], row['quantity'])
+        try:
+            Item.all.clear()
+            with open(file, 'r') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    if row['name'] == None or row['price'] == None or row['quantity'] == None:
+                        raise InstantiateCSVError
+                    else:
+                        cls(row['name'], row['price'], row['quantity'])
+        except InstantiateCSVError:
+            print('Файл item.csv поврежден')
+
 
 
     @staticmethod
