@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import src.item as item
 from src.phone import Phone
+import pytest
 
 if __name__ == '__main__':
     item.Item.pay_rate = 0,5
@@ -23,3 +24,7 @@ if __name__ == '__main__':
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert phone1 + item2 == 15
     assert phone1 + item1 == 35
+
+def test_instantiate_from_csv():
+    with pytest.raises(FileNotFoundError):
+        item.Item.instantiate_from_csv('dsa')
